@@ -1,5 +1,6 @@
 package com.example.FullStackSpringBoot.student;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,11 +13,16 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/students")
 public class StudentController {
+
+    private final StudentService studentService;
+
+    @Autowired
+    public StudentController(StudentService studentService) {
+        this.studentService = studentService;
+    }
+
     @GetMapping
     public List<Student> getAllStudents() {
-        return List.of(
-                new Student(UUID.randomUUID(), "Michael", "Steinert", Student.Gender.MALE, "michael-steinert@gmx.de"),
-                new Student(UUID.randomUUID(), "Marie", "Schmidt", Student.Gender.FEMALE, "marie-schmidt@gmx.de")
-        );
+        return studentService.getAllStudents();
     }
 }
