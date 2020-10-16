@@ -20,7 +20,8 @@ public class StudentController {
 
     @GetMapping
     public List<Student> getAllStudents() {
-        return studentService.getAllStudents();
+        throw new IllegalStateException("Ups es ist ein Error ai");
+        //return studentService.getAllStudents();
     }
 
     @PostMapping
