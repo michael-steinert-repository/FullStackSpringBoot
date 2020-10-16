@@ -1,5 +1,7 @@
 package com.example.FullStackSpringBoot.student;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.UUID;
 
 public class Student {
@@ -13,7 +15,11 @@ public class Student {
         MALE, FEMALE
     }
 
-    public Student(UUID studentId, String firstName, String lastName, Gender gender, String email) {
+    public Student(@JsonProperty("studentId") UUID studentId,
+                   @JsonProperty("firstName") String firstName,
+                   @JsonProperty("lastName") String lastName,
+                   @JsonProperty("gender") Gender gender,
+                   @JsonProperty("email") String email) {
         this.studentId = studentId;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -39,5 +45,16 @@ public class Student {
 
     public String getEmail() {
         return email;
+    }
+
+    @Override
+    public String toString() {
+        return "Student{" +
+                "studentId=" + studentId +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", gender=" + gender +
+                ", email='" + email + '\'' +
+                '}';
     }
 }

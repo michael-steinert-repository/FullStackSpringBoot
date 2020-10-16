@@ -104,7 +104,10 @@ class App extends Component {
            <Container>
                <Table dataSource={students} columns={columns} pagination={false} rowKey='studentId'/>
                <Modal title='Add new Student' visible={isAddStudentModalVisible} onOk={this.closeAddStudentModalVisible} onCancel={this.closeAddStudentModalVisible} width={1000}>
-                   <AddStudentForm/>
+                   <AddStudentForm onSuccess={() => {
+                       this.closeAddStudentModalVisible();
+                       this.fetchStudents();
+                   }}/>
                </Modal>
                <Footer numberOfStudents={students.length} handleAddStudentClickEvent={this.openAddStudentModalVisible}/>
            </Container>
