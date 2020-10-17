@@ -1,5 +1,6 @@
 package com.example.FullStackSpringBoot.student;
 
+import com.example.FullStackSpringBoot.exception.ApiRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,7 +21,7 @@ public class StudentController {
 
     @GetMapping
     public List<Student> getAllStudents() {
-        throw new IllegalStateException("Ups es ist ein Error ai");
+        throw new ApiRequestException("Mal schauen");
         //return studentService.getAllStudents();
     }
 

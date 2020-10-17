@@ -37,10 +37,10 @@ class App extends Component {
                 isFetching: false
               });
         })).catch((error) => {
-            const errorStatus = error.error.status;
-            const description = error.error.error;
+            const message = error.error.message;
+            const status = error.error.httpStatus;
             console.log(error.error);
-            errorNotification('Status: ' + errorStatus, description);
+            errorNotification(message, status);
             this.setState({
                isFetching: false
             });
