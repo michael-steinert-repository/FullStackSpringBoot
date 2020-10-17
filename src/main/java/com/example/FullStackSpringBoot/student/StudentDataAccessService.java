@@ -28,6 +28,12 @@ public class StudentDataAccessService {
         return jdbcTemplate.update(sql, studentId, student.getFirstName(), student.getLastName(), student.getGender().name().toUpperCase(), student.getEmail());
     }
 
+    @SuppressWarnings("ConstantConditions")
+    public boolean isEmailTaken(String email) {
+        String sql = "SELECT EXISTS (SELECT 1 FROM student WHERE email = ?)";
+        return jdbcTemplate.queryForObject(sql, new Object[] {email}, (resultSet, i) -> resultSet.getBoolean(1));
+    }
+
     private RowMapper<Student> mapStudentFromDb() {
         return (resultSet, i) -> {
             String studentIdStr = resultSet.getString("student_id");

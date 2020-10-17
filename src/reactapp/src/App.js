@@ -31,7 +31,6 @@ class App extends Component {
     getAllStudents()
         .then( res => res.json()
             .then(students => {
-              console.log(students)
               this.setState({
                 students: students,
                 isFetching: false
@@ -39,7 +38,6 @@ class App extends Component {
         })).catch((error) => {
             const message = error.error.message;
             const status = error.error.httpStatus;
-            console.log(error.error);
             errorNotification(message, status);
             this.setState({
                isFetching: false
@@ -53,10 +51,17 @@ class App extends Component {
     const commonElements = () => (
         <div>
             <Modal title='Add new Student' visible={isAddStudentModalVisible} onOk={this.closeAddStudentModalVisible} onCancel={this.closeAddStudentModalVisible} width={1000}>
-                <AddStudentForm onSuccess={() => {
-                this.closeAddStudentModalVisible();
-                this.fetchStudents();
-                }}/>
+                <AddStudentForm
+                    onSuccess={() => {
+                    this.closeAddStudentModalVisible();
+                    this.fetchStudents();
+                    }}
+                    onFailure={(error) => {
+                        const message = error.error.message;
+                        const status = error.error.httpStatus;
+                        errorNotification(message, status);
+                    }}
+                />
             </Modal>
             <Footer numberOfStudents={students.length} handleAddStudentClickEvent={this.openAddStudentModalVisible}/>
         </div>
