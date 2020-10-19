@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.UUID;
 
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
@@ -23,6 +24,11 @@ public class StudentController {
     public List<Student> getAllStudents() {
         // throw new ApiRequestException("Custom Exception");
         return studentService.getAllStudents();
+    }
+
+    @GetMapping(path= "{studentId}/courses")
+    public List<StudentCourse> getAllCoursesForStudent(@PathVariable("studentId") UUID studentId) {
+        return studentService.getAllCoursesForStudent(studentId);
     }
 
     @PostMapping

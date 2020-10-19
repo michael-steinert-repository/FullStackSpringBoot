@@ -25,6 +25,10 @@ public class StudentService {
         return studentDataAccessService.selectAllStudents();
     }
 
+    public List<StudentCourse> getAllCoursesForStudent(UUID studentId) {
+        return studentDataAccessService.selectAllStudentCourses(studentId);
+    }
+
     public void addNewStudent(Student student) {
         addNewStudent(null, student);
     }
